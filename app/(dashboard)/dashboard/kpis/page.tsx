@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/client'
@@ -48,7 +48,7 @@ export default function KPIsPage() {
   const supabase = createClient()
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<KPIForm>({
-    resolver: zodResolver(kpiSchema),
+    resolver: zodResolver(kpiSchema) as Resolver<KPIForm>,
     defaultValues: { direction: 'higher_better' },
   })
 

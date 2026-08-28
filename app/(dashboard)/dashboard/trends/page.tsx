@@ -37,7 +37,7 @@ export default function TrendsPage() {
     return acc
   }, {})
 
-  const timeData = Object.entries(byPeriod).sort(([a], [b]) => a.localeCompare(b)).map(([p, cats]) => ({ name: p, ...cats }))
+  const timeData: Array<Record<string, string | number>> = Object.entries(byPeriod).sort(([a], [b]) => a.localeCompare(b)).map(([p, cats]) => ({ name: p, ...cats }))
 
   if (loading) return <div className="grid grid-cols-1 gap-4">{Array.from({ length: 2 }).map((_, i) => <CardSkeleton key={i} />)}</div>
 
