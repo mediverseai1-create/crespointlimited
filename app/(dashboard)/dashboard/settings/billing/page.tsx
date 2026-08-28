@@ -9,10 +9,10 @@ import { Check, Zap } from 'lucide-react'
 import type { Organization } from '@/types'
 
 const PLANS = [
-  { id: 'free', name: 'Free', price: '$0/mo', features: ['5 KPIs', '1 user', 'Basic dashboard'], href: null },
-  { id: 'starter', name: 'Starter', price: '$47/mo', features: ['25 KPIs', '3 users', 'AI Assistant'], href: process.env.NEXT_PUBLIC_APP_URL },
-  { id: 'professional', name: 'Professional', price: '$57/mo', features: ['Unlimited KPIs', '10 users', 'All features'], href: process.env.NEXT_PUBLIC_APP_URL },
-  { id: 'business', name: 'Business', price: '$97/mo', features: ['Unlimited everything', 'Dedicated CSM', 'API access'], href: process.env.NEXT_PUBLIC_APP_URL },
+  { id: 'free', name: 'Free', price: '$0/mo', features: ['Up to 10 KPIs', '2 users', 'Basic dashboard'], href: null },
+  { id: 'professional', name: 'Professional', price: '$47/mo', features: ['Unlimited KPIs', '10 users', 'AI Assistant', 'Automated insights'], href: process.env.NEXT_PUBLIC_PROFESSIONAL_PAYMENT_LINK ?? null },
+  { id: 'growth', name: 'Growth', price: '$57/mo', features: ['Everything in Pro', 'Root-cause analysis', 'Scenario planning', '15 users'], href: process.env.NEXT_PUBLIC_GROWTH_PAYMENT_LINK ?? null },
+  { id: 'business', name: 'Business', price: '$97/mo', features: ['Unlimited everything', 'Executive dashboards', 'Audit logs', '25 users'], href: process.env.NEXT_PUBLIC_BUSINESS_PAYMENT_LINK ?? null },
 ]
 
 export default function BillingPage() {

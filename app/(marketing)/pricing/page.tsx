@@ -7,26 +7,26 @@ export const metadata = { title: 'Pricing' }
 const plans = [
   {
     name: 'Free', price: '$0', period: '/month',
-    desc: 'For individuals exploring business intelligence.',
-    features: ['5 KPIs', '1 user', 'Basic dashboard', '30-day data history', 'Community support'],
+    desc: 'For individuals and small teams getting started.',
+    features: ['Basic business dashboard', 'Basic operations dashboard', 'CSV import', 'Up to 10 KPIs', 'Limited AI analysis', 'Basic insights', 'Basic reports', 'Up to 2 users'],
     cta: 'Get Started Free', href: '/auth/signup', highlight: false,
   },
   {
-    name: 'Starter', price: '$47', period: '/month',
-    desc: 'For small teams ready to track what matters.',
-    features: ['25 KPIs', '3 users', 'Advanced analytics', '1-year data history', 'AI Assistant (50 queries/mo)', 'CSV data uploads', 'Email + chat support'],
-    cta: 'Start Starter', href: process.env.STARTER_PAYMENT_LINK ?? '/auth/signup', highlight: false,
+    name: 'Professional', price: '$47', period: '/month',
+    desc: 'For growing businesses that need full intelligence.',
+    features: ['Advanced dashboards', 'Unlimited KPIs', 'AI Business Analyst', 'Automated insights', 'Forecasting', 'Operations Intelligence', 'Risk monitoring', 'Action Center', 'Advanced reports', 'Up to 10 users'],
+    cta: 'Start Professional', href: process.env.PROFESSIONAL_PAYMENT_LINK ?? '/auth/signup', highlight: false,
   },
   {
-    name: 'Professional', price: '$57', period: '/month',
-    desc: 'For growing businesses that need full intelligence.',
-    features: ['Unlimited KPIs', '10 users', 'All analytics modules', 'Unlimited data history', 'AI Assistant (300 queries/mo)', 'Automated insights', 'Custom reports & exports', 'Opportunity detection', 'Action Center', 'Priority support'],
-    cta: 'Start Professional', href: process.env.PRO_PAYMENT_LINK ?? '/auth/signup', highlight: true,
+    name: 'Growth', price: '$57', period: '/month',
+    desc: 'For businesses that need deeper analysis and more automation.',
+    features: ['Everything in Professional', 'Advanced AI analysis', 'Root-cause analysis', 'Scenario planning', 'Advanced operations monitoring', 'Opportunity detection', 'Historical analytics', 'Automated executive summaries', 'Increased data capacity', 'Up to 15 users'],
+    cta: 'Start Growth', href: process.env.GROWTH_PAYMENT_LINK ?? '/auth/signup', highlight: true,
   },
   {
     name: 'Business', price: '$97', period: '/month',
-    desc: 'For enterprises requiring scale and customization.',
-    features: ['Unlimited everything', 'Unlimited users', 'White-label options', 'Custom integrations', 'Dedicated Customer Success Manager', 'SLA guarantee (99.9%)', 'SSO / SAML', 'API access', 'Custom onboarding'],
+    desc: 'For larger teams and organizations.',
+    features: ['Everything in Growth', 'Advanced forecasting', 'Cross-department intelligence', 'Advanced risk intelligence', 'Executive dashboards', 'Custom reporting', 'Advanced permissions', 'Audit logs', 'Bulk data operations', 'Up to 25 users'],
     cta: 'Start Business', href: process.env.BUSINESS_PAYMENT_LINK ?? '/auth/signup', highlight: false,
   },
 ]

@@ -25,10 +25,10 @@ const features = [
 ]
 
 const plans = [
-  { name: 'Free', price: '$0', period: '/month', highlight: false, features: ['5 KPIs', '1 user', 'Basic dashboard', '30-day data history', 'Email support'], cta: 'Get Started Free', href: '/auth/signup' },
-  { name: 'Starter', price: '$47', period: '/month', highlight: false, features: ['25 KPIs', '3 users', 'Advanced analytics', '1-year history', 'AI Assistant (50 queries/mo)', 'Email + chat support'], cta: 'Start Starter', href: '/auth/signup' },
-  { name: 'Professional', price: '$57', period: '/month', highlight: true, features: ['Unlimited KPIs', '10 users', 'All analytics', 'Unlimited history', 'AI Assistant (300 queries/mo)', 'Automated insights', 'Priority support'], cta: 'Start Professional', href: '/auth/signup' },
-  { name: 'Business', price: '$97', period: '/month', highlight: false, features: ['Unlimited everything', 'Unlimited users', 'Dedicated CSM', 'SLA guarantee', 'SSO/SAML', 'API access'], cta: 'Start Business', href: '/auth/signup' },
+  { name: 'Free', price: '$0', period: '/month', highlight: false, features: ['Up to 10 KPIs', '2 users', 'Basic dashboard', 'Basic insights', 'Basic reports'], cta: 'Get Started Free', href: '/auth/signup' },
+  { name: 'Professional', price: '$47', period: '/month', highlight: false, features: ['Unlimited KPIs', '10 users', 'Advanced dashboards', 'AI Business Analyst', 'Automated insights', 'Action Center'], cta: 'Start Professional', href: 'https://selar.com/47plan?currency=USD' },
+  { name: 'Growth', price: '$57', period: '/month', highlight: true, features: ['Everything in Pro', '15 users', 'Root-cause analysis', 'Scenario planning', 'Opportunity detection', 'Executive summaries'], cta: 'Start Growth', href: 'https://selar.com/57plan?currency=USD' },
+  { name: 'Business', price: '$97', period: '/month', highlight: false, features: ['Everything in Growth', '25 users', 'Advanced forecasting', 'Executive dashboards', 'Audit logs', 'Custom reporting'], cta: 'Start Business', href: 'https://selar.com/97plan?currency=USD' },
 ]
 
 const faqs = [
