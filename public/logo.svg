@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="10" fill="#0F1E3C"/>
+  <path d="M10 24 C10 16.268 16.268 10 24 10 L24 10 C27.866 10 31 11.791 31 14 L31 14 C31 16.209 27.866 18 24 18 C20.134 18 17 16.209 17 14" stroke="#D4A843" stroke-width="0" fill="none"/>
+  <text x="24" y="32" font-family="Georgia, serif" font-size="18" font-weight="700" text-anchor="middle" fill="#FFFFFF" letter-spacing="-1">C</text>
+  <text x="33" y="32" font-family="Georgia, serif" font-size="18" font-weight="700" text-anchor="middle" fill="#D4A843" letter-spacing="-1">P</text>
+  <path d="M8 38 L40 38" stroke="#D4A843" stroke-width="2" stroke-linecap="round"/>
+</svg>
