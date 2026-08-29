@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
@@ -36,7 +35,6 @@ const sizes = [
 export default function OnboardingOrgPage() {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
-  const supabase = createClient()
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -44,30 +42,16 @@ export default function OnboardingOrgPage() {
 
   const onSubmit = async (data: FormData) => {
     setError(null)
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) { router.push('/auth/signin'); return }
-
-    // Create organization
     const slug = slugify(data.name) + '-' + Math.random().toString(36).slice(2, 7)
-    const { data: org, error: orgError } = await supabase.from('organizations').insert({
-      name: data.name,
-      slug,
-      industry: data.industry,
-      country: data.country,
-      size: data.size,
-    }).select().single()
 
-    if (orgError) { setError(orgError.message); return }
-
-    // Update profile with org
-    await supabase.from('profiles').update({ organization_id: org.id }).eq('id', user.id)
-
-    // Add user as owner member
-    await supabase.from('organization_members').insert({
-      organization_id: org.id,
-      user_id: user.id,
-      role: 'owner',
+    const res = await fetch('/api/onboarding/setup-org', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...data, slug }),
     })
+
+    const json = await res.json()
+    if (!res.ok) { setError(json.error ?? 'Failed to set up organization'); return }
 
     router.push('/onboarding/goals')
   }

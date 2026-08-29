@@ -34,13 +34,18 @@ export default function SignUpPage() {
 
   const onSubmit = async (data: FormData) => {
     setError(null)
-    const { error: authError } = await supabase.auth.signUp({
+    const { data: authData, error: authError } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
       options: { emailRedirectTo: `${window.location.origin}/onboarding/profile` },
     })
     if (authError) {
       setError(authError.message)
+      return
+    }
+    // If session exists, email confirmation is disabled — redirect immediately
+    if (authData.session) {
+      router.push('/onboarding/profile')
       return
     }
     setSuccess(true)

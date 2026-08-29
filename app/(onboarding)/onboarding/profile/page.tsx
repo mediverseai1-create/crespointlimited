@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
@@ -32,7 +31,6 @@ const jobRoles = [
 export default function OnboardingProfilePage() {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
-  const supabase = createClient()
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -40,17 +38,13 @@ export default function OnboardingProfilePage() {
 
   const onSubmit = async (data: FormData) => {
     setError(null)
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) { router.push('/auth/signin'); return }
-
-    const { error: upsertError } = await supabase.from('profiles').upsert({
-      id: user.id,
-      full_name: data.full_name,
-      job_title: data.job_title,
-      phone: data.phone ?? null,
+    const res = await fetch('/api/onboarding/setup-profile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
     })
-
-    if (upsertError) { setError(upsertError.message); return }
+    const json = await res.json()
+    if (!res.ok) { setError(json.error ?? 'Failed to save profile'); return }
     router.push('/onboarding/organization')
   }
 
