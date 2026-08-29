@@ -1,32 +1,18 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import {
-  BarChart3, Target, Bot, Lightbulb, TrendingUp, Sparkles,
-  Cog, CheckSquare, AlertTriangle, ArrowRight, Check,
+  BarChart3, Bot, Lightbulb, ArrowRight, Check,
   ChevronDown, Shield, Zap, Users, Activity, Upload,
-  FileText, MessageSquare, Star, Lock, Clock, Headphones
+  MessageSquare, Lock, Clock, Headphones, CheckSquare, Sparkles
 } from 'lucide-react'
 
 /* ─── Data ─────────────────────────────────────────── */
 
-const tickerItems = [
-  'Revenue Tracking', 'KPI Management', 'AI Business Analyst', 'Root-Cause Analysis',
-  'Automated Insights', 'Opportunity Detection', 'Action Center', 'Forecasting',
-  'Operations Intelligence', 'Team Collaboration', 'Executive Reports', 'Data Hub',
-]
-
 const trustBadges = [
   { icon: Lock,       label: 'Bank-grade security' },
   { icon: Zap,        label: 'Real-time analysis' },
-  { icon: Headphones, label: '24/7 AI support' },
+  { icon: Headphones, label: 'AI-powered support' },
   { icon: Shield,     label: 'Fully isolated data' },
-]
-
-const stats = [
-  { value: '500+',  label: 'Businesses onboarded' },
-  { value: '9',     label: 'Integrated modules' },
-  { value: '14+',   label: 'Dashboard pages' },
-  { value: '100%',  label: 'Data isolation' },
 ]
 
 const features = [
@@ -127,40 +113,6 @@ const whyTrust = [
   },
 ]
 
-const testimonials = [
-  {
-    platform: 'In-app',
-    quote: 'Finally a dashboard that tells me what to do, not just what happened. The AI analyst is genuinely useful.',
-    name: 'Tunde Adeyemi',
-    role: 'CEO',
-    company: 'Nexcore Logistics · Lagos',
-    month: 'Jun 2026',
-  },
-  {
-    platform: 'On LinkedIn',
-    quote: 'We spotted a cost overrun in operations within the first week. CrestPoint paid for itself instantly.',
-    name: 'Chioma Okafor',
-    role: 'COO',
-    company: 'BridgeScale Ltd · Abuja',
-    month: 'May 2026',
-  },
-  {
-    platform: 'In-app',
-    quote: 'The AI answers are surprisingly accurate. It knows our numbers and actually explains the why behind every change.',
-    name: 'James Eferebo',
-    role: 'Operations Manager',
-    company: 'Harven Retail · Port Harcourt',
-    month: 'Apr 2026',
-  },
-  {
-    platform: 'On X',
-    quote: 'Set up in under 30 minutes. Had my first KPI report before lunch. Honestly impressive for the price.',
-    name: 'Adaeze Nwosu',
-    role: 'Business Owner',
-    company: 'Adaeze Farms · Enugu',
-    month: 'Mar 2026',
-  },
-]
 
 const plans = [
   {
@@ -220,11 +172,6 @@ export default function LandingPage() {
   return (
     <div className="bg-white min-h-screen font-sans">
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }
-        .ticker-track { animation: ticker 28s linear infinite; display: flex; width: max-content; }
-        .ticker-track:hover { animation-play-state: paused; }
-      `}} />
 
       {/* ── NAV ── */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
@@ -258,12 +205,6 @@ export default function LandingPage() {
 
             {/* Left */}
             <div>
-              {/* Social proof badge */}
-              <div className="inline-flex items-center gap-2 bg-[#0F1E3C]/5 border border-[#0F1E3C]/10 text-[#0F1E3C] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-8">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                Now serving 500+ growing businesses
-              </div>
-
               <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Business Intelligence</p>
               <h1 className="text-5xl sm:text-6xl font-extrabold text-[#0F1E3C] leading-[1.05] tracking-tight mb-6">
                 Run your business<br />
@@ -352,50 +293,14 @@ export default function LandingPage() {
                   </div>
                 </div>
 
-                {/* Mini KPI row */}
-                <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { label: 'Revenue', value: '$284K', up: true },
-                    { label: 'Costs', value: '$142K', up: false },
-                    { label: 'Satisfaction', value: '94.2%', up: true },
-                  ].map(({ label, value, up }) => (
-                    <div key={label} className="bg-white/5 rounded-xl p-3 border border-white/5 text-center">
-                      <p className="text-white/40 text-xs mb-1">{label}</p>
-                      <p className="text-white font-bold text-sm">{value}</p>
-                      <p className={`text-xs font-medium mt-0.5 ${up ? 'text-green-400' : 'text-amber-400'}`}>
-                        {up ? '↑' : '↑'} {up ? '+12%' : '+8%'}
-                      </p>
-                    </div>
+                {/* Module tags */}
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {['KPI Tracking', 'Trend Analysis', 'Action Center', 'Forecasting'].map((tag) => (
+                    <span key={tag} className="text-xs bg-white/5 border border-white/10 text-white/50 px-3 py-1 rounded-full">{tag}</span>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TICKER ── */}
-      <div className="overflow-hidden border-y border-[#0F1E3C]/8 bg-[#0F1E3C]/[0.03] py-3">
-        <div className="ticker-track">
-          {[...tickerItems, ...tickerItems].map((item, i) => (
-            <div key={i} className="flex items-center gap-3 px-8 whitespace-nowrap">
-              <span className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">{item}</span>
-              <span className="text-[#D4A843] text-lg leading-none">·</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── STATS ── */}
-      <section className="py-14 bg-white border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map(({ value, label }) => (
-              <div key={label}>
-                <p className="text-4xl font-extrabold text-[#0F1E3C] mb-1">{value}</p>
-                <p className="text-sm text-[#64748B]">{label}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -535,44 +440,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS — jeroid style ── */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Testimonials</p>
-            <h2 className="text-4xl font-extrabold text-[#0F1E3C] mb-2">Loved by business leaders</h2>
-            <p className="text-[#64748B]">Here&apos;s what our users are saying</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {testimonials.map(({ platform, quote, name, role, company, month }) => (
-              <div key={name} className="bg-white rounded-2xl p-5 border border-gray-100 hover:shadow-lg transition-all flex flex-col">
-                {/* Platform tag */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-semibold bg-gray-50 border border-gray-200 text-[#64748B] px-3 py-1 rounded-full">{platform}</span>
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-3 w-3 fill-[#D4A843] text-[#D4A843]" />
-                    ))}
-                  </div>
-                </div>
-                <p className="text-sm text-[#0F1E3C] leading-relaxed flex-1 mb-4 italic">&ldquo;{quote}&rdquo;</p>
-                <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
-                  <div className="w-9 h-9 rounded-full bg-[#0F1E3C] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-                    {name.split(' ').map((n) => n[0]).join('')}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-[#0F1E3C]">{name}</p>
-                    <p className="text-xs text-[#64748B]">{role} · {company}</p>
-                  </div>
-                  <span className="ml-auto text-xs text-[#64748B]/60">{month}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── PRICING ── */}
       <section id="pricing" className="py-24 bg-[#F8F6F1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -658,10 +525,10 @@ export default function LandingPage() {
         <div className="relative max-w-3xl mx-auto px-4 text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-4">Get started today</p>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 leading-tight">
-            JOIN 500+ BUSINESSES
+            Run your business<br />with full clarity.
           </h2>
           <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto">
-            Create a free account and start running your business with the clarity and confidence that only real-time AI intelligence can give you.
+            Create a free account and start turning your business data into clear decisions and confident action — powered by AI.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/auth/signup" className="w-full sm:w-auto bg-[#D4A843] text-white font-bold px-10 py-4 rounded-xl hover:bg-[#c49a38] transition-all shadow-xl flex items-center justify-center gap-2 text-base">
