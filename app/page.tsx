@@ -3,7 +3,7 @@ import Image from 'next/image'
 import {
   BarChart3, Bot, Lightbulb, ArrowRight, Check,
   ChevronDown, Shield, Zap, Users, Activity, Upload,
-  MessageSquare, Lock, Clock, Headphones, CheckSquare, Sparkles
+  Lock, Clock, Headphones, CheckSquare
 } from 'lucide-react'
 
 /* ─── Data ─────────────────────────────────────────── */
@@ -199,108 +199,50 @@ export default function LandingPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="bg-white pt-16 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="bg-white pt-20 pb-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-4">Business Intelligence</p>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#0F1E3C] leading-[1.05] tracking-tight mb-6">
+            Run your business<br />
+            <span className="text-[#D4A843]">with full clarity.</span>
+          </h1>
 
-            {/* Left */}
-            <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Business Intelligence</p>
-              <h1 className="text-5xl sm:text-6xl font-extrabold text-[#0F1E3C] leading-[1.05] tracking-tight mb-6">
-                Run your business<br />
-                <span className="text-[#D4A843]">with full clarity.</span>
-              </h1>
+          <p className="text-xl text-[#64748B] leading-relaxed mb-10 max-w-2xl mx-auto">
+            Connect your data, track every KPI, detect problems early, and let AI tell you exactly what to do next.
+          </p>
 
-              <p className="text-lg text-[#64748B] leading-relaxed mb-8 max-w-md">
-                Connect your data, track every KPI, detect problems early, and let AI tell you exactly what to do next.
-              </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-xl mx-auto mb-10">
+            {[
+              'Real-time dashboards across all business units',
+              'AI analyst trained on your actual business data',
+              'Automated insights — no manual analysis needed',
+              'Action center to close the loop on every issue',
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm text-[#0F1E3C] font-medium">
+                <span className="mt-0.5 w-5 h-5 rounded-full bg-[#D4A843]/15 flex items-center justify-center flex-shrink-0">
+                  <Check className="h-3 w-3 text-[#D4A843]" />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
 
-              {/* Bullet list — remoteworkher style */}
-              <ul className="space-y-3 mb-10">
-                {[
-                  'Real-time dashboards across all business units',
-                  'AI analyst trained on your actual business data',
-                  'Automated insights — no manual analysis needed',
-                  'Action center to close the loop on every issue',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-[#0F1E3C] font-medium">
-                    <span className="mt-0.5 w-5 h-5 rounded-full bg-[#D4A843]/15 flex items-center justify-center flex-shrink-0">
-                      <Check className="h-3 w-3 text-[#D4A843]" />
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+            <Link href="/auth/signup" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#D4A843] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#c49a38] transition-all shadow-md text-base">
+              Start for free <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a href="#how-it-works" className="w-full sm:w-auto flex items-center justify-center gap-2 border-2 border-[#0F1E3C]/20 text-[#0F1E3C] font-semibold px-8 py-4 rounded-xl hover:border-[#0F1E3C] transition-all text-base">
+              See how it works
+            </a>
+          </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/auth/signup" className="flex items-center justify-center gap-2 bg-[#D4A843] text-white font-bold px-7 py-3.5 rounded-xl hover:bg-[#c49a38] transition-all shadow-md text-sm">
-                  Start for free <ArrowRight className="h-4 w-4" />
-                </Link>
-                <a href="#how-it-works" className="flex items-center justify-center gap-2 border-2 border-[#0F1E3C]/20 text-[#0F1E3C] font-semibold px-7 py-3.5 rounded-xl hover:border-[#0F1E3C] transition-all text-sm">
-                  See how it works
-                </a>
+          <div className="flex flex-wrap items-center justify-center gap-6 pt-8 border-t border-gray-100">
+            {trustBadges.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex items-center gap-1.5 text-xs font-medium text-[#64748B]">
+                <Icon className="h-3.5 w-3.5 text-[#D4A843]" />
+                {label}
               </div>
-
-              {/* Trust badges — jeroid style */}
-              <div className="flex flex-wrap gap-5 mt-8 pt-8 border-t border-gray-100">
-                {trustBadges.map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-1.5 text-xs font-medium text-[#64748B]">
-                    <Icon className="h-3.5 w-3.5 text-[#D4A843]" />
-                    {label}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right — AI chat preview */}
-            <div className="relative">
-              <div className="absolute -top-4 -right-4 w-40 h-40 bg-[#D4A843]/10 rounded-full blur-3xl" />
-              <div className="absolute -bottom-4 -left-4 w-40 h-40 bg-[#0F1E3C]/10 rounded-full blur-3xl" />
-
-              <div className="relative bg-[#0F1E3C] rounded-3xl p-6 shadow-2xl">
-                {/* Header */}
-                <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/10">
-                  <div className="w-9 h-9 bg-[#D4A843] rounded-xl flex items-center justify-center shadow">
-                    <Bot className="h-4.5 w-4.5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-white text-sm font-bold">CrestPoint AI</p>
-                    <p className="text-white/40 text-xs">Powered by Gemini</p>
-                  </div>
-                  <span className="ml-auto flex items-center gap-1.5 text-xs bg-green-500/20 text-green-400 px-2.5 py-1 rounded-full font-medium">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400" />Live
-                  </span>
-                </div>
-
-                {/* Chat bubble */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-3">
-                  <p className="text-white/40 text-xs mb-1.5 flex items-center gap-1"><MessageSquare className="h-3 w-3" /> You asked</p>
-                  <p className="text-white text-sm font-medium">&ldquo;Why did operational costs spike this month?&rdquo;</p>
-                </div>
-
-                <div className="bg-[#D4A843]/10 border border-[#D4A843]/25 rounded-xl p-4 mb-4">
-                  <p className="text-[#D4A843] text-xs mb-2 flex items-center gap-1.5 font-semibold"><Sparkles className="h-3 w-3" /> AI Analysis</p>
-                  <p className="text-white/80 text-sm leading-relaxed mb-3">
-                    Costs rose <strong className="text-white">14.2%</strong> this month, driven by a <strong className="text-white">23% overtime surge</strong> in logistics during weeks 2–3.
-                  </p>
-                  <div className="bg-white/5 rounded-lg p-3 space-y-1.5">
-                    <p className="text-[#D4A843] text-xs font-bold mb-2">Recommended actions</p>
-                    {['Review shift scheduling in logistics', 'Set overtime approval at $5K/week', 'Monitor driver capacity vs. route load'].map((a) => (
-                      <p key={a} className="text-xs text-white/60 flex items-start gap-1.5">
-                        <span className="text-[#D4A843] mt-0.5 flex-shrink-0">→</span> {a}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Module tags */}
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {['KPI Tracking', 'Trend Analysis', 'Action Center', 'Forecasting'].map((tag) => (
-                    <span key={tag} className="text-xs bg-white/5 border border-white/10 text-white/50 px-3 py-1 rounded-full">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
