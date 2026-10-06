@@ -4,25 +4,31 @@ import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { CardSkeleton } from '@/components/ui/LoadingSpinner'
-import { KPICard } from '@/components/charts/KPICard'
-import { AreaChart } from '@/components/charts/AreaChart'
-import { timeAgo, severityColor } from '@/lib/utils'
+import { severityColor } from '@/lib/utils'
 import {
-  Target, Database, FileText, AlertCircle,
-  Activity, TrendingUp, Lightbulb
+  Brain, Compass, GitBranch, Shield, DollarSign, Globe,
+  Lightbulb, Target, Database, FileText, BookOpen, TrendingUp,
+  AlertCircle, Sparkles, ArrowRight
 } from 'lucide-react'
-import type { KPI, Insight, ActivityLog, BusinessMetric } from '@/types'
+import type { KPI, Insight } from '@/types'
 
-export default function DashboardPage() {
+const engines = [
+  { icon: Brain,     title: 'Decision Engine',       href: '/dashboard/decision-engine', desc: 'Analyze any business problem and get a recommended decision' },
+  { icon: Compass,   title: 'Strategy Engine',        href: '/dashboard/strategy',        desc: 'Turn a business goal into an executable strategy' },
+  { icon: GitBranch, title: 'Scenario Intelligence',  href: '/dashboard/scenarios',       desc: 'Model consequences of decisions before committing' },
+  { icon: Shield,    title: 'Risk Intelligence',      href: '/dashboard/risk',            desc: 'Surface strategic, financial, and operational risks' },
+  { icon: DollarSign,title: 'Revenue Intelligence',   href: '/dashboard/revenue',         desc: 'Deep analysis of growth, pipeline, and revenue risks' },
+  { icon: Globe,     title: 'Competitive Intel',      href: '/dashboard/competitive',     desc: 'Monitor competitors and market dynamics' },
+]
+
+export default function ExecutiveBriefingPage() {
   const [kpis, setKpis] = useState<KPI[]>([])
   const [insights, setInsights] = useState<Insight[]>([])
-  const [activity, setActivity] = useState<ActivityLog[]>([])
-  const [metrics, setMetrics] = useState<BusinessMetric[]>([])
   const [orgId, setOrgId] = useState<string | null>(null)
+  const [orgName, setOrgName] = useState<string>('')
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
@@ -35,32 +41,23 @@ export default function DashboardPage() {
     setOrgId(oid ?? null)
     if (!oid) { setLoading(false); return }
 
-    const [kpisRes, insightsRes, activityRes, metricsRes] = await Promise.all([
+    const { data: org } = await supabase.from('organizations').select('name').eq('id', oid).single()
+    setOrgName(org?.name ?? '')
+
+    const [kpisRes, insightsRes] = await Promise.all([
       supabase.from('kpis').select('*').eq('organization_id', oid).limit(6),
-      supabase.from('insights').select('*').eq('organization_id', oid).order('created_at', { ascending: false }).limit(3),
-      supabase.from('activity_logs').select('*').eq('organization_id', oid).order('created_at', { ascending: false }).limit(8),
-      supabase.from('business_metrics').select('*').eq('organization_id', oid).order('created_at', { ascending: false }).limit(30),
+      supabase.from('insights').select('*').eq('organization_id', oid).order('created_at', { ascending: false }).limit(5),
     ])
 
     setKpis(kpisRes.data ?? [])
     setInsights(insightsRes.data ?? [])
-    setActivity(activityRes.data ?? [])
-    setMetrics(metricsRes.data ?? [])
     setLoading(false)
   }, [supabase])
 
   useEffect(() => { loadData() }, [loadData])
 
-  // Build chart data from metrics
-  const chartData = metrics.reduce<Record<string, Record<string, string | number>>>((acc, m) => {
-    const key = m.period_start ?? m.created_at.slice(0, 10)
-    if (!acc[key]) acc[key] = { name: key }
-    acc[key][m.category] = (Number(acc[key][m.category] ?? 0)) + m.value
-    return acc
-  }, {})
-  const chartArray = Object.values(chartData).slice(0, 10)
-
-  const atRisk = kpis.filter((k) => k.status !== 'on_track')
+  const atRisk = kpis.filter(k => k.status !== 'on_track')
+  const unreadInsights = insights.filter(i => !i.is_read)
 
   if (loading) {
     return (
@@ -77,7 +74,7 @@ export default function DashboardPage() {
       <EmptyState
         icon={Target}
         title="Welcome to CrestPoint"
-        description="Complete your setup to start monitoring your business performance."
+        description="Complete your setup to activate your AI executive intelligence system."
         actionLabel="Complete Setup"
         actionHref="/onboarding/profile"
       />
@@ -85,14 +82,21 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Summary bar */}
+    <div className="space-y-8 max-w-6xl">
+      {/* Header */}
+      <div>
+        <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-1">Executive Briefing</p>
+        <h1 className="text-2xl font-bold text-[#0F1E3C]">{orgName || 'Your Organization'}</h1>
+        <p className="text-sm text-[#64748B] mt-1">Your AI strategic intelligence overview — updated continuously.</p>
+      </div>
+
+      {/* Status summary */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Total KPIs', value: kpis.length, icon: Target, color: 'text-blue-600 bg-blue-50' },
-          { label: 'At Risk / Off Track', value: atRisk.length, icon: AlertCircle, color: 'text-amber-600 bg-amber-50' },
-          { label: 'Active Insights', value: insights.filter(i => !i.is_read).length, icon: Lightbulb, color: 'text-purple-600 bg-purple-50' },
-          { label: 'Metrics Loaded', value: metrics.length, icon: TrendingUp, color: 'text-green-600 bg-green-50' },
+          { label: 'KPIs Tracked', value: kpis.length, icon: Target, color: 'text-blue-600 bg-blue-50' },
+          { label: 'At Risk / Off Track', value: atRisk.length, icon: AlertCircle, color: atRisk.length > 0 ? 'text-red-600 bg-red-50' : 'text-green-600 bg-green-50' },
+          { label: 'Unread Insights', value: unreadInsights.length, icon: Lightbulb, color: 'text-purple-600 bg-purple-50' },
+          { label: 'Opportunities', value: 0, icon: Sparkles, color: 'text-amber-600 bg-amber-50' },
         ].map(({ label, value, icon: Icon, color }) => (
           <Card key={label} padding="sm">
             <div className="flex items-center gap-3">
@@ -108,50 +112,68 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* KPIs */}
+      {/* AI Engines */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-semibold text-[#0F1E3C]">Key Performance Indicators</h2>
-          <Link href="/dashboard/kpis"><Button variant="ghost" size="sm">View All</Button></Link>
-        </div>
-        {kpis.length === 0 ? (
-          <EmptyState
-            icon={Target}
-            title="No KPIs yet"
-            description="Add your first KPI to start tracking performance."
-            actionLabel="Add KPI"
-            actionHref="/dashboard/kpis"
-          />
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {kpis.map((kpi) => (
-              <KPICard key={kpi.id} kpi={kpi} />
-            ))}
+          <div>
+            <h2 className="text-base font-bold text-[#0F1E3C]">AI Intelligence Engines</h2>
+            <p className="text-xs text-[#64748B]">Each engine is grounded in your business data.</p>
           </div>
-        )}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {engines.map(({ icon: Icon, title, href, desc }) => (
+            <Link
+              key={href}
+              href={href}
+              className="group bg-white rounded-2xl border border-gray-200 p-5 hover:border-[#D4A843]/50 hover:shadow-lg transition-all duration-300 flex items-start gap-4"
+            >
+              <div className="w-10 h-10 bg-[#0F1E3C] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#D4A843] transition-colors duration-300">
+                <Icon className="h-5 w-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-bold text-[#0F1E3C] text-sm mb-1">{title}</p>
+                <p className="text-xs text-[#64748B] leading-relaxed">{desc}</p>
+              </div>
+              <ArrowRight className="h-4 w-4 text-[#64748B] opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5" />
+            </Link>
+          ))}
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Trend chart */}
-        <Card className="lg:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* KPIs at risk */}
+        <Card>
           <CardHeader>
-            <CardTitle>Performance Trend</CardTitle>
-            <Link href="/dashboard/analytics"><Button variant="ghost" size="sm">Full Analytics</Button></Link>
+            <CardTitle>KPIs Requiring Attention</CardTitle>
+            <Link href="/dashboard/kpis"><Button variant="ghost" size="sm">View All</Button></Link>
           </CardHeader>
           <CardContent>
-            {chartArray.length === 0 ? (
-              <EmptyState icon={TrendingUp} title="No trend data" description="Upload data to see performance trends." />
+            {kpis.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-sm text-[#64748B] mb-3">No KPIs configured yet.</p>
+                <Link href="/dashboard/kpis"><Button variant="secondary" size="sm"><Target className="h-4 w-4" /> Add KPI</Button></Link>
+              </div>
+            ) : atRisk.length === 0 ? (
+              <p className="text-sm text-green-600 text-center py-8 font-medium">All KPIs on track.</p>
             ) : (
-              <AreaChart
-                data={chartArray}
-                areas={[{ key: Object.keys(chartArray[0] ?? {}).filter(k => k !== 'name')[0] ?? 'value', color: '#D4A843' }]}
-                height={220}
-              />
+              <div className="space-y-3">
+                {atRisk.map(kpi => (
+                  <div key={kpi.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+                    <div>
+                      <p className="text-sm font-semibold text-[#0F1E3C]">{kpi.name}</p>
+                      <p className="text-xs text-[#64748B]">{kpi.category}</p>
+                    </div>
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-red-50 text-red-600 border border-red-100">
+                      {kpi.status?.replace(/_/g, ' ')}
+                    </span>
+                  </div>
+                ))}
+              </div>
             )}
           </CardContent>
         </Card>
 
-        {/* Insights panel */}
+        {/* Recent Insights */}
         <Card>
           <CardHeader>
             <CardTitle>Recent Insights</CardTitle>
@@ -159,7 +181,10 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             {insights.length === 0 ? (
-              <p className="text-sm text-[#64748B] text-center py-8">No insights yet. Insights are generated as you add data.</p>
+              <div className="text-center py-8 space-y-2">
+                <p className="text-sm text-[#64748B]">Insights are generated as you add data and KPIs.</p>
+                <Link href="/dashboard/data"><Button variant="secondary" size="sm"><Database className="h-4 w-4" /> Upload Data</Button></Link>
+              </div>
             ) : (
               <div className="space-y-3">
                 {insights.map((insight) => (
@@ -179,46 +204,18 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      {/* Quick Actions */}
+      {/* Quick actions */}
       <Card>
-        <CardHeader>
-          <CardTitle>Quick Actions</CardTitle>
-        </CardHeader>
+        <CardHeader><CardTitle>Quick Actions</CardTitle></CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-3">
-            <Link href="/dashboard/kpis"><Button variant="secondary" size="sm"><Target className="h-4 w-4" />Add KPI</Button></Link>
-            <Link href="/dashboard/data"><Button variant="outline" size="sm"><Database className="h-4 w-4" />Upload Data</Button></Link>
-            <Link href="/dashboard/reports"><Button variant="outline" size="sm"><FileText className="h-4 w-4" />Generate Report</Button></Link>
-            <Link href="/dashboard/ai-assistant"><Button variant="outline" size="sm"><Activity className="h-4 w-4" />Ask AI Analyst</Button></Link>
+            <Link href="/dashboard/decision-engine"><Button variant="secondary" size="sm"><Brain className="h-4 w-4" /> New Decision</Button></Link>
+            <Link href="/dashboard/strategy"><Button variant="outline" size="sm"><Compass className="h-4 w-4" /> Build Strategy</Button></Link>
+            <Link href="/dashboard/data"><Button variant="outline" size="sm"><Database className="h-4 w-4" /> Upload Data</Button></Link>
+            <Link href="/dashboard/reports"><Button variant="outline" size="sm"><FileText className="h-4 w-4" /> Generate Report</Button></Link>
+            <Link href="/dashboard/decision-memory"><Button variant="outline" size="sm"><BookOpen className="h-4 w-4" /> Log Decision</Button></Link>
+            <Link href="/dashboard/risk"><Button variant="outline" size="sm"><Shield className="h-4 w-4" /> Risk Assessment</Button></Link>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Activity */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Activity</CardTitle>
-          <Link href="/dashboard/activity"><Button variant="ghost" size="sm">View All</Button></Link>
-        </CardHeader>
-        <CardContent>
-          {activity.length === 0 ? (
-            <p className="text-sm text-[#64748B] text-center py-4">No activity yet.</p>
-          ) : (
-            <div className="divide-y divide-gray-100">
-              {activity.map((log) => (
-                <div key={log.id} className="flex items-start gap-3 py-3">
-                  <div className="w-7 h-7 rounded-full bg-[#0F1E3C]/10 flex items-center justify-center flex-shrink-0">
-                    <Activity className="h-3.5 w-3.5 text-[#0F1E3C]" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-[#0F1E3C] capitalize">{log.action.replace(/_/g, ' ')}</p>
-                    {log.resource_type && <p className="text-xs text-[#64748B]">{log.resource_type}</p>}
-                  </div>
-                  <span className="text-xs text-[#64748B] flex-shrink-0">{timeAgo(log.created_at)}</span>
-                </div>
-              ))}
-            </div>
-          )}
         </CardContent>
       </Card>
     </div>

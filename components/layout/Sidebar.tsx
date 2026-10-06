@@ -3,30 +3,57 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
-  LayoutDashboard, BarChart3, Target, Cog, TrendingUp, Lightbulb,
-  Sparkles, CheckSquare, FileText, Bot, Database, Users, Activity,
-  Settings, ChevronRight, LogOut
+  LayoutDashboard, Brain, Compass, GitBranch, BookOpen,
+  DollarSign, Shield, Globe, TrendingUp, Lightbulb, Sparkles,
+  CheckSquare, FileText, BarChart3, Target, Cog, Database,
+  Users, Activity, Settings, ChevronRight, LogOut
 } from 'lucide-react'
 import { Logo } from './Logo'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/Badge'
 import type { Organization, Profile } from '@/types'
 
-const navItems = [
-  { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
-  { label: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
-  { label: 'KPIs', href: '/dashboard/kpis', icon: Target },
-  { label: 'Operations', href: '/dashboard/operations', icon: Cog },
-  { label: 'Trends', href: '/dashboard/trends', icon: TrendingUp },
-  { label: 'Insights', href: '/dashboard/insights', icon: Lightbulb },
-  { label: 'Opportunities', href: '/dashboard/opportunities', icon: Sparkles },
-  { label: 'Actions', href: '/dashboard/actions', icon: CheckSquare },
-  { label: 'Reports', href: '/dashboard/reports', icon: FileText },
-  { label: 'AI Assistant', href: '/dashboard/ai-assistant', icon: Bot },
-  { label: 'Data', href: '/dashboard/data', icon: Database },
-  { label: 'Activity', href: '/dashboard/activity', icon: Activity },
-  { label: 'Team', href: '/dashboard/team', icon: Users },
-  { label: 'Settings', href: '/dashboard/settings', icon: Settings },
+const navGroups = [
+  {
+    label: 'Intelligence',
+    items: [
+      { label: 'Executive Briefing', href: '/dashboard', icon: LayoutDashboard },
+      { label: 'Decision Engine', href: '/dashboard/decision-engine', icon: Brain },
+      { label: 'Strategy Engine', href: '/dashboard/strategy', icon: Compass },
+      { label: 'Scenario Intelligence', href: '/dashboard/scenarios', icon: GitBranch },
+      { label: 'Decision Memory', href: '/dashboard/decision-memory', icon: BookOpen },
+    ],
+  },
+  {
+    label: 'Analysis',
+    items: [
+      { label: 'Revenue Intelligence', href: '/dashboard/revenue', icon: DollarSign },
+      { label: 'Risk Intelligence', href: '/dashboard/risk', icon: Shield },
+      { label: 'Competitive Intel', href: '/dashboard/competitive', icon: Globe },
+      { label: 'Forecasting', href: '/dashboard/trends', icon: TrendingUp },
+      { label: 'Insights', href: '/dashboard/insights', icon: Lightbulb },
+      { label: 'Opportunities', href: '/dashboard/opportunities', icon: Sparkles },
+    ],
+  },
+  {
+    label: 'Execution',
+    items: [
+      { label: 'Actions', href: '/dashboard/actions', icon: CheckSquare },
+      { label: 'KPIs', href: '/dashboard/kpis', icon: Target },
+      { label: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
+      { label: 'Operations', href: '/dashboard/operations', icon: Cog },
+    ],
+  },
+  {
+    label: 'Management',
+    items: [
+      { label: 'Reports', href: '/dashboard/reports', icon: FileText },
+      { label: 'Data Hub', href: '/dashboard/data', icon: Database },
+      { label: 'Team', href: '/dashboard/team', icon: Users },
+      { label: 'Activity', href: '/dashboard/activity', icon: Activity },
+      { label: 'Settings', href: '/dashboard/settings', icon: Settings },
+    ],
+  },
 ]
 
 const planLabels: Record<string, string> = {
@@ -54,26 +81,35 @@ export function Sidebar({ org, profile, onSignOut }: SidebarProps) {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
-        {navItems.map(({ label, href, icon: Icon }) => {
-          const active = href === '/dashboard' ? pathname === href : pathname.startsWith(href)
-          return (
-            <Link
-              key={href}
-              href={href}
-              className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 group',
-                active
-                  ? 'bg-[#D4A843] text-white'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
-              )}
-            >
-              <Icon className={cn('h-4 w-4 flex-shrink-0', active ? 'text-white' : 'text-white/50 group-hover:text-white')} />
-              {label}
-              {active && <ChevronRight className="ml-auto h-3.5 w-3.5" />}
-            </Link>
-          )
-        })}
+      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-4">
+        {navGroups.map((group) => (
+          <div key={group.label}>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/25 px-3 mb-1.5">
+              {group.label}
+            </p>
+            <div className="space-y-0.5">
+              {group.items.map(({ label, href, icon: Icon }) => {
+                const active = href === '/dashboard' ? pathname === href : pathname.startsWith(href)
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={cn(
+                      'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 group',
+                      active
+                        ? 'bg-[#D4A843] text-white'
+                        : 'text-white/70 hover:text-white hover:bg-white/10'
+                    )}
+                  >
+                    <Icon className={cn('h-4 w-4 flex-shrink-0', active ? 'text-white' : 'text-white/50 group-hover:text-white')} />
+                    {label}
+                    {active && <ChevronRight className="ml-auto h-3.5 w-3.5" />}
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        ))}
       </nav>
 
       {/* Org Info + User */}

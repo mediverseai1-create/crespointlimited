@@ -1,118 +1,133 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import {
-  BarChart3, Bot, Lightbulb, ArrowRight, Check,
-  ChevronDown, Shield, Zap, Users, Activity, Upload,
-  Lock, Clock, Headphones, CheckSquare
+  Brain, Compass, GitBranch, TrendingUp, Shield, Lightbulb,
+  DollarSign, Globe, FileText, BookOpen, ArrowRight, Check,
+  ChevronDown, Lock, Zap, Headphones, Users, BarChart3,
+  ShoppingCart, Cog, UserCheck, Package, Search, Activity,
+  Upload, Target
 } from 'lucide-react'
 
 /* ─── Data ─────────────────────────────────────────── */
 
 const trustBadges = [
   { icon: Lock,       label: 'Bank-grade security' },
-  { icon: Zap,        label: 'Real-time analysis' },
+  { icon: Zap,        label: 'Real-time intelligence' },
   { icon: Headphones, label: 'AI-powered support' },
   { icon: Shield,     label: 'Fully isolated data' },
 ]
 
-const features = [
-  {
-    icon: BarChart3,
-    title: 'Business Intelligence',
-    tag: 'Core',
-    bullets: [
-      'Real-time dashboards for every unit',
-      'Revenue, operations & workforce views',
-      'Automated executive reports',
-      'Custom metric tracking',
-    ],
-  },
-  {
-    icon: Bot,
-    title: 'AI Business Analyst',
-    tag: 'AI',
-    bullets: [
-      'Ask questions in plain English',
-      'Answers grounded in your real data',
-      'Recommended actions included',
-      'Powered by Google Gemini',
-    ],
-  },
-  {
-    icon: Lightbulb,
-    title: 'Automated Insights',
-    tag: 'AI',
-    bullets: [
-      'Surface anomalies automatically',
-      'Spot trends before they escalate',
-      'Proactive opportunity detection',
-      'Zero manual analysis required',
-    ],
-  },
-  {
-    icon: CheckSquare,
-    title: 'Action Center',
-    tag: 'Workflow',
-    bullets: [
-      'Turn insights into tasks instantly',
-      'Assign actions to team members',
-      'Track progress and close the loop',
-      'Accountability built in',
-    ],
-  },
+const aiCapabilities = [
+  { icon: Brain,      title: 'AI Decision Engine',        desc: 'Analyzes problems and recommends decisions with full reasoning.' },
+  { icon: Compass,    title: 'Strategy Engine',           desc: 'Turns business goals into executable strategies with milestones.' },
+  { icon: GitBranch,  title: 'Scenario Intelligence',     desc: 'Models the consequences of decisions before you commit.' },
+  { icon: TrendingUp, title: 'Forecasting Engine',        desc: 'Predicts outcomes using your data and real-world signals.' },
+  { icon: Shield,     title: 'Risk Intelligence',         desc: 'Identifies strategic, financial, and operational risks early.' },
+  { icon: Lightbulb,  title: 'Opportunity Intelligence',  desc: 'Surfaces growth and cost opportunities you may be missing.' },
+  { icon: DollarSign, title: 'Revenue Intelligence',      desc: 'Deep analysis of pipeline, pricing, customers, and revenue risks.' },
+  { icon: Globe,      title: 'Competitive Intelligence',  desc: 'Monitors competitors and market dynamics continuously.' },
+  { icon: FileText,   title: 'Executive Briefing Engine', desc: 'Auto-produces decision-ready intelligence for executives and boards.' },
+  { icon: BookOpen,   title: 'Decision Memory',           desc: 'Learns from past decisions and outcomes to improve future strategy.' },
 ]
 
-const quickModules = [
-  { icon: '📊', label: 'Dashboard',     desc: 'Full business overview' },
-  { icon: '🎯', label: 'KPIs',          desc: 'Track what matters' },
-  { icon: '🤖', label: 'AI Analyst',    desc: 'Ask anything' },
-  { icon: '💡', label: 'Insights',      desc: 'Auto-detected patterns' },
-  { icon: '📈', label: 'Trends',        desc: 'Historical analysis' },
-  { icon: '🔎', label: 'Opportunities', desc: 'Revenue & cost wins' },
-  { icon: '✅', label: 'Actions',       desc: 'Task accountability' },
-  { icon: '📁', label: 'Reports',       desc: 'Shareable exports' },
-  { icon: '⚙️', label: 'Operations',   desc: 'Workforce & supply chain' },
+const dataSources = [
+  { icon: BarChart3,  label: 'Revenue & Finance' },
+  { icon: Users,      label: 'CRM & Customers' },
+  { icon: ShoppingCart, label: 'Sales Pipeline' },
+  { icon: Activity,   label: 'Marketing Data' },
+  { icon: Cog,        label: 'Operations' },
+  { icon: UserCheck,  label: 'Workforce & HR' },
+  { icon: Package,    label: 'Product Data' },
+  { icon: FileText,   label: 'Business Documents' },
+  { icon: Globe,      label: 'Market Intelligence' },
+  { icon: Search,     label: 'Competitor Info' },
+]
+
+const coreEngines = [
+  {
+    icon: Brain,
+    title: 'AI Decision Engine',
+    tag: 'Flagship',
+    bullets: [
+      'Present any business problem or decision',
+      'AI evaluates options with full reasoning',
+      'Consequences and risks surfaced upfront',
+      'Recommended course of action included',
+    ],
+  },
+  {
+    icon: Compass,
+    title: 'Strategy Engine',
+    tag: 'AI',
+    bullets: [
+      'Input a goal: "Grow revenue from $5M to $10M"',
+      'AI identifies constraints and opportunities',
+      'Builds executable strategies with priorities',
+      'Monitors whether the strategy is working',
+    ],
+  },
+  {
+    icon: GitBranch,
+    title: 'Scenario Intelligence',
+    tag: 'AI',
+    bullets: [
+      'Evaluate any decision before committing',
+      'Model multiple outcome paths simultaneously',
+      'Identify second-order consequences early',
+      'Compares risk-reward across all options',
+    ],
+  },
+  {
+    icon: FileText,
+    title: 'Executive Briefing Engine',
+    tag: 'AI',
+    bullets: [
+      'Auto-generates decision-ready intelligence',
+      'Board and executive-level summaries',
+      'Flags what changed and what it means',
+      'One-click export for meetings and reviews',
+    ],
+  },
 ]
 
 const steps = [
   {
     num: '1',
     icon: Upload,
-    title: 'Create your account',
-    desc: 'Sign up in minutes with just your email. No credit card required for the free plan.',
+    title: 'Connect your business data',
+    desc: 'Upload data from any source — financials, CRM, operations, workforce. No integrations or technical setup needed.',
   },
   {
     num: '2',
-    icon: Activity,
-    title: 'Connect your data',
-    desc: 'Upload CSV or Excel files from any business system. Define your KPIs immediately.',
+    icon: Brain,
+    title: 'Define your context and goals',
+    desc: 'Tell CrestPoint your objectives and the decisions you face. The AI builds a continuously updated model of your business.',
   },
   {
     num: '3',
-    icon: Bot,
-    title: 'Get instant intelligence',
-    desc: 'CrestPoint surfaces insights, flags issues, and gives you AI-powered recommendations from day one.',
+    icon: Compass,
+    title: 'Get strategic intelligence',
+    desc: 'CrestPoint surfaces risks, opportunities, strategy recommendations, and decision support — and monitors outcomes continuously.',
   },
 ]
 
 const whyTrust = [
   {
     num: '01',
-    title: 'Complete data isolation',
-    desc: 'Row-level security ensures your business data is completely isolated from every other organization on the platform. We never use your data to train AI.',
+    title: 'AI trained exclusively on your data',
+    desc: 'Every analysis is grounded in your actual business context. CrestPoint never gives generic advice — it works with your specific numbers, history, and goals.',
   },
   {
     num: '02',
-    title: 'AI that knows your business',
-    desc: 'Unlike generic tools, our AI is configured with your organization\'s actual metrics and context — so answers are specific to you, not generic advice.',
+    title: 'Decisions with full reasoning',
+    desc: 'The AI doesn\'t just tell you what to do. It explains why, shows its reasoning, and surfaces the assumptions behind every recommendation.',
   },
   {
     num: '03',
-    title: 'Insights that lead to action',
-    desc: 'Every insight comes with recommended actions. CrestPoint doesn\'t just tell you what\'s wrong — it tells you what to do about it.',
+    title: 'Continuously monitors strategy outcomes',
+    desc: 'After a strategy is defined, CrestPoint keeps watching. It alerts you when results deviate from plan so you can act before problems compound.',
   },
 ]
-
 
 const plans = [
   {
@@ -121,7 +136,7 @@ const plans = [
     period: '/month',
     highlight: false,
     desc: 'Get started with no commitment.',
-    features: ['Up to 10 KPIs', '2 users', 'Basic dashboard', 'Basic insights', 'Basic reports'],
+    features: ['Up to 10 KPIs', '2 users', 'Basic AI insights', 'Executive briefings', 'Basic reports'],
     cta: 'Get Started Free',
     href: '/auth/signup',
   },
@@ -131,7 +146,7 @@ const plans = [
     period: '/month',
     highlight: false,
     desc: 'For growing teams moving fast.',
-    features: ['Unlimited KPIs', '10 users', 'Advanced dashboards', 'AI Business Analyst', 'Automated insights', 'Action Center'],
+    features: ['Unlimited KPIs', '10 users', 'AI Decision Engine', 'Strategy Engine', 'Risk Intelligence', 'Revenue Intelligence'],
     cta: 'Start Professional',
     href: 'https://selar.com/47plan?currency=USD',
   },
@@ -141,7 +156,7 @@ const plans = [
     period: '/month',
     highlight: true,
     desc: 'Most popular for scaling businesses.',
-    features: ['Everything in Pro', '15 users', 'Root-cause analysis', 'Scenario planning', 'Opportunity detection', 'Executive summaries'],
+    features: ['Everything in Pro', '15 users', 'Scenario Intelligence', 'Competitive Intelligence', 'Forecasting Engine', 'Executive Briefing Engine'],
     cta: 'Start Growth',
     href: 'https://selar.com/57plan?currency=USD',
   },
@@ -151,19 +166,19 @@ const plans = [
     period: '/month',
     highlight: false,
     desc: 'For enterprises that demand more.',
-    features: ['Everything in Growth', '25 users', 'Advanced forecasting', 'Executive dashboards', 'Audit logs', 'Custom reporting'],
+    features: ['Everything in Growth', '25 users', 'Decision Memory', 'Full AI agent layer', 'Audit logs', 'Custom reporting'],
     cta: 'Start Business',
     href: 'https://selar.com/97plan?currency=USD',
   },
 ]
 
 const faqs = [
-  { q: 'Do I need technical expertise?', a: 'No. CrestPoint is designed for business leaders. Upload a CSV and get insights immediately — no SQL, no coding.' },
-  { q: 'How does the AI Business Analyst work?', a: 'Our AI uses Google Gemini configured with your actual data. Ask questions in plain English, get specific contextual answers.' },
-  { q: 'Is my business data secure?', a: 'Yes. Row-level security ensures your data is completely isolated from other organizations. We never use it to train AI.' },
-  { q: 'Can I invite my team?', a: 'Yes. All paid plans include team collaboration with role-based access control.' },
-  { q: 'How do I import my data?', a: 'Upload CSV or Excel files from the Data Hub. No integrations or technical setup required.' },
-  { q: 'Can I cancel anytime?', a: 'Yes. All plans are month-to-month with no long-term commitment. Cancel from your account settings.' },
+  { q: 'What makes CrestPoint different from a BI dashboard?', a: 'CrestPoint is not a dashboard. It\'s an AI strategic intelligence system. Instead of showing charts, it analyzes your situation, evaluates decisions, builds strategies, identifies risks, and gives you actionable recommendations — all grounded in your real business data.' },
+  { q: 'How does the AI Decision Engine work?', a: 'You present a business problem or decision. The AI analyzes your available data, evaluates options, models consequences, identifies risks and opportunities, and recommends a course of action with full reasoning.' },
+  { q: 'Can CrestPoint build a strategy from a business objective?', a: 'Yes. Input a goal such as "grow revenue from $5M to $10M in 18 months" and the Strategy Engine will analyze your constraints, identify opportunities, map required initiatives, and produce an executable plan.' },
+  { q: 'Is my business data secure?', a: 'Yes. Row-level security ensures your data is completely isolated from every other organization. The AI works only on your data — we never use it to train shared models.' },
+  { q: 'Do I need technical expertise to use this?', a: 'No. CrestPoint is designed for executives and business leaders. No SQL, no coding, no technical setup. Upload data and start getting intelligence immediately.' },
+  { q: 'Can I cancel anytime?', a: 'Yes. All plans are month-to-month with no long-term commitment. Cancel from your account settings at any time.' },
 ]
 
 /* ─── Page ─────────────────────────────────────────── */
@@ -171,7 +186,6 @@ const faqs = [
 export default function LandingPage() {
   return (
     <div className="bg-white min-h-screen font-sans">
-
 
       {/* ── NAV ── */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
@@ -183,7 +197,7 @@ export default function LandingPage() {
             </span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[#64748B]">
-            <a href="#features" className="hover:text-[#0F1E3C] transition-colors">Features</a>
+            <a href="#capabilities" className="hover:text-[#0F1E3C] transition-colors">Capabilities</a>
             <a href="#how-it-works" className="hover:text-[#0F1E3C] transition-colors">How It Works</a>
             <a href="#pricing" className="hover:text-[#0F1E3C] transition-colors">Pricing</a>
           </div>
@@ -201,22 +215,22 @@ export default function LandingPage() {
       {/* ── HERO ── */}
       <section className="bg-white pt-20 pb-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-4">Business Intelligence</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-4">AI Executive Intelligence</p>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#0F1E3C] leading-[1.05] tracking-tight mb-6">
-            Run your business<br />
-            <span className="text-[#D4A843]">with full clarity.</span>
+            The Strategic Brain<br />
+            <span className="text-[#D4A843]">for Your Company.</span>
           </h1>
 
-          <p className="text-xl text-[#64748B] leading-relaxed mb-10 max-w-2xl mx-auto">
-            Connect your data, track every KPI, detect problems early, and let AI tell you exactly what to do next.
+          <p className="text-xl text-[#64748B] leading-relaxed mb-8 max-w-2xl mx-auto">
+            Not a dashboard. An AI system that understands your business, evaluates complex decisions, builds executable strategies, and monitors outcomes — continuously.
           </p>
 
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-xl mx-auto mb-10">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-2xl mx-auto mb-10">
             {[
-              'Real-time dashboards across all business units',
-              'AI analyst trained on your actual business data',
-              'Automated insights — no manual analysis needed',
-              'Action center to close the loop on every issue',
+              'AI Executive Decision Engine — analyze any business problem',
+              'Strategy Engine — turn objectives into executable plans',
+              'Risk & Scenario Intelligence — see consequences before you commit',
+              'Revenue, Competitive & Opportunity Intelligence built in',
             ].map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-[#0F1E3C] font-medium">
                 <span className="mt-0.5 w-5 h-5 rounded-full bg-[#D4A843]/15 flex items-center justify-center flex-shrink-0">
@@ -247,52 +261,75 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── QUICK MODULES — remoteworkher quick actions style ── */}
-      <section className="py-16 bg-[#F8F6F1]">
+      {/* ── AI CAPABILITIES GRID ── */}
+      <section id="capabilities" className="py-20 bg-[#F8F6F1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-1">Platform</p>
-              <h2 className="text-2xl font-extrabold text-[#0F1E3C]">All you need in one place</h2>
-            </div>
-            <Link href="/auth/signup" className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#D4A843] hover:text-[#c49a38] transition-colors">
-              Start free <ArrowRight className="h-4 w-4" />
-            </Link>
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">10 AI engines</p>
+            <h2 className="text-4xl font-extrabold text-[#0F1E3C] mb-4">One intelligence platform. Everything you need.</h2>
+            <p className="text-[#64748B] text-lg max-w-xl mx-auto">Every engine works together — informed by the same business data, compounding over time.</p>
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-9 gap-3">
-            {quickModules.map(({ icon, label, desc }) => (
-              <div key={label} className="bg-white rounded-2xl p-4 flex flex-col items-center text-center border border-gray-100 hover:border-[#D4A843]/40 hover:shadow-md transition-all group cursor-default">
-                <span className="text-2xl mb-2">{icon}</span>
-                <p className="text-xs font-bold text-[#0F1E3C] group-hover:text-[#D4A843] transition-colors">{label}</p>
-                <p className="text-xs text-[#64748B] mt-0.5 hidden lg:block leading-tight">{desc}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {aiCapabilities.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="bg-white rounded-2xl p-5 border border-gray-100 hover:border-[#D4A843]/50 hover:shadow-lg transition-all duration-300 group">
+                <div className="w-10 h-10 bg-[#0F1E3C] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#D4A843] transition-colors duration-300">
+                  <Icon className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="font-bold text-[#0F1E3C] text-sm mb-2 leading-snug">{title}</h3>
+                <p className="text-xs text-[#64748B] leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── FEATURES — jeroid style ── */}
-      <section id="features" className="py-24 bg-white">
+      {/* ── WHAT CRESTPOINT UNDERSTANDS ── */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Features</p>
-            <h2 className="text-4xl font-extrabold text-[#0F1E3C] mb-4">One platform for all your intelligence needs</h2>
-            <p className="text-[#64748B] text-lg max-w-xl mx-auto">Nine integrated modules — all built to work together so you never miss a thing</p>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Business Intelligence Layer</p>
+              <h2 className="text-4xl font-extrabold text-[#0F1E3C] mb-5 leading-snug">
+                CrestPoint connects to<br />every part of your business.
+              </h2>
+              <p className="text-[#64748B] text-lg leading-relaxed mb-8">
+                The AI builds a continuously updated intelligence model across your revenue, operations, customers, workforce, and market — so every decision is grounded in what's actually happening.
+              </p>
+              <Link href="/auth/signup" className="inline-flex items-center gap-2 bg-[#D4A843] text-white font-bold px-7 py-3.5 rounded-xl hover:bg-[#c49a38] transition-all shadow-md text-sm">
+                Connect your data <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {dataSources.map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-3 bg-[#F8F6F1] rounded-xl p-4 border border-gray-100 hover:border-[#D4A843]/30 transition-colors">
+                  <div className="w-9 h-9 bg-[#0F1E3C] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon className="h-4 w-4 text-[#D4A843]" />
+                  </div>
+                  <span className="text-sm font-semibold text-[#0F1E3C]">{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
+        </div>
+      </section>
 
+      {/* ── CORE ENGINES DETAIL ── */}
+      <section className="py-20 bg-[#F8F6F1]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Core engines</p>
+            <h2 className="text-4xl font-extrabold text-[#0F1E3C] mb-4">Not reports. Decisions.</h2>
+            <p className="text-[#64748B] text-lg max-w-xl mx-auto">CrestPoint replaces the cycle of data → chart → meeting → decision with AI that does the thinking for you.</p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {features.map(({ icon: Icon, title, tag, bullets }) => (
+            {coreEngines.map(({ icon: Icon, title, tag, bullets }) => (
               <div key={title} className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#D4A843]/40 hover:shadow-xl transition-all duration-300 flex flex-col">
                 <div className="w-12 h-12 bg-[#0F1E3C] rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#D4A843] transition-colors duration-300">
                   <Icon className="h-5 w-5 text-white" />
                 </div>
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="font-bold text-[#0F1E3C] text-base leading-snug">{title}</h3>
-                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0 ml-2 ${
-                    tag === 'AI' ? 'bg-amber-50 text-amber-600' :
-                    tag === 'Workflow' ? 'bg-green-50 text-green-600' :
-                    'bg-gray-100 text-gray-500'
-                  }`}>{tag}</span>
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0 ml-2 ${tag === 'Flagship' ? 'bg-[#D4A843]/15 text-[#c49a38]' : 'bg-amber-50 text-amber-600'}`}>{tag}</span>
                 </div>
                 <ul className="space-y-2 flex-1">
                   {bullets.map((b) => (
@@ -302,7 +339,7 @@ export default function LandingPage() {
                   ))}
                 </ul>
                 <Link href="/auth/signup" className="mt-5 text-xs font-bold text-[#D4A843] hover:text-[#c49a38] flex items-center gap-1 transition-colors">
-                  Learn more <ArrowRight className="h-3 w-3" />
+                  Get started <ArrowRight className="h-3 w-3" />
                 </Link>
               </div>
             ))}
@@ -310,19 +347,18 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── HOW IT WORKS — jeroid 3-step style ── */}
-      <section id="how-it-works" className="py-24 bg-[#F8F6F1]">
+      {/* ── HOW IT WORKS ── */}
+      <section id="how-it-works" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Get started</p>
-            <h2 className="text-4xl font-extrabold text-[#0F1E3C] mb-4">From sign-up to first insight in minutes</h2>
-            <p className="text-[#64748B] text-lg">Let go of the stress of manual analysis. We make it effortless.</p>
+            <h2 className="text-4xl font-extrabold text-[#0F1E3C] mb-4">From data to strategic intelligence in minutes</h2>
+            <p className="text-[#64748B] text-lg">No integrations, no setup teams, no waiting. Upload your data and the AI gets to work.</p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map(({ num, icon: Icon, title, desc }) => (
-              <div key={num} className="bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all relative overflow-hidden group">
-                <div className="absolute top-4 right-4 text-6xl font-extrabold text-gray-50 select-none group-hover:text-[#D4A843]/10 transition-colors">
+              <div key={num} className="bg-[#F8F6F1] rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all relative overflow-hidden group">
+                <div className="absolute top-4 right-4 text-6xl font-extrabold text-gray-100 select-none group-hover:text-[#D4A843]/10 transition-colors">
                   {num}
                 </div>
                 <div className="w-14 h-14 bg-[#0F1E3C] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#D4A843] transition-colors duration-300">
@@ -339,22 +375,22 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── WHY TRUST — jeroid 01/02/03 style ── */}
+      {/* ── WHY TRUST ── */}
       <section className="py-24 bg-[#0F1E3C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Why trust us</p>
-              <h2 className="text-4xl font-extrabold text-white mb-6">You&apos;re in the safest hands</h2>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-3">Why trust CrestPoint</p>
+              <h2 className="text-4xl font-extrabold text-white mb-6">Intelligence you can act on</h2>
               <p className="text-white/55 text-lg leading-relaxed mb-8">
-                We value your data above all else and always make your security our top priority.
+                Most AI tools give generic answers. CrestPoint knows your business — and builds that understanding over time.
               </p>
               <div className="flex flex-wrap gap-4">
                 {[
                   { icon: Shield, label: 'Bank-grade security' },
-                  { icon: Clock, label: 'Real-time processing' },
-                  { icon: Users, label: 'Team collaboration' },
-                  { icon: Lock, label: 'ISO-aligned data practices' },
+                  { icon: Target, label: 'Contextual to your business' },
+                  { icon: Brain, label: 'Reasoning, not just answers' },
+                  { icon: BookOpen, label: 'Learns from your decisions' },
                 ].map(({ icon: Icon, label }) => (
                   <div key={label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs font-semibold text-white/70">
                     <Icon className="h-3.5 w-3.5 text-[#D4A843]" />{label}
@@ -362,10 +398,9 @@ export default function LandingPage() {
                 ))}
               </div>
             </div>
-
             <div className="space-y-5">
               {whyTrust.map(({ num, title, desc }) => (
-                <div key={num} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8 hover:border-[#D4A843]/25 transition-all group">
+                <div key={num} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-[#D4A843]/25 transition-all group">
                   <div className="flex items-start gap-4">
                     <span className="text-3xl font-extrabold text-[#D4A843]/30 group-hover:text-[#D4A843]/60 transition-colors leading-none flex-shrink-0 mt-0.5">
                       {num}
@@ -390,7 +425,6 @@ export default function LandingPage() {
             <h2 className="text-4xl font-extrabold text-[#0F1E3C] mb-4">Simple, transparent pricing</h2>
             <p className="text-[#64748B] text-lg">Start free. Scale as you grow. No surprises, no contracts.</p>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {plans.map((plan) => (
               <div
@@ -459,7 +493,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FINAL CTA — jeroid "JOIN" banner style ── */}
+      {/* ── FINAL CTA ── */}
       <section className="py-24 bg-[#0F1E3C] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: `radial-gradient(ellipse at 20% 50%, #D4A843 0%, transparent 55%), radial-gradient(ellipse at 80% 50%, #D4A843 0%, transparent 55%)`
@@ -467,17 +501,17 @@ export default function LandingPage() {
         <div className="relative max-w-3xl mx-auto px-4 text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-[#D4A843] mb-4">Get started today</p>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 leading-tight">
-            Run your business<br />with full clarity.
+            Give your company<br />an AI strategic brain.
           </h2>
           <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto">
-            Create a free account and start turning your business data into clear decisions and confident action — powered by AI.
+            Create a free account and start making better decisions with AI intelligence built on your actual business data.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/auth/signup" className="w-full sm:w-auto bg-[#D4A843] text-white font-bold px-10 py-4 rounded-xl hover:bg-[#c49a38] transition-all shadow-xl flex items-center justify-center gap-2 text-base">
               Create free account <ArrowRight className="h-4 w-4" />
             </Link>
-            <a href="#features" className="w-full sm:w-auto border border-white/20 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/5 transition-all text-center text-base">
-              Explore features
+            <a href="#capabilities" className="w-full sm:w-auto border border-white/20 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/5 transition-all text-center text-base">
+              Explore capabilities
             </a>
           </div>
           <p className="text-white/25 text-xs mt-6">No credit card required · Free plan available · Cancel anytime</p>
@@ -497,16 +531,15 @@ export default function LandingPage() {
                 </span>
               </div>
               <p className="text-sm text-white/40 leading-relaxed max-w-xs">
-                AI-powered business intelligence that turns your data into clear decisions and confident action.
+                The AI strategic brain for modern companies. Executive decision intelligence, built on your data.
               </p>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Product</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Platform</p>
               <ul className="space-y-3 text-sm text-white/50">
-                <li><a href="#features" className="hover:text-white/80 transition-colors">Features</a></li>
+                <li><a href="#capabilities" className="hover:text-white/80 transition-colors">Capabilities</a></li>
                 <li><a href="#how-it-works" className="hover:text-white/80 transition-colors">How It Works</a></li>
                 <li><a href="#pricing" className="hover:text-white/80 transition-colors">Pricing</a></li>
-                <li><Link href="/pricing" className="hover:text-white/80 transition-colors">All Plans</Link></li>
               </ul>
             </div>
             <div>
@@ -521,7 +554,7 @@ export default function LandingPage() {
           </div>
           <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-white/30">&copy; {new Date().getFullYear()} CrestPoint Limited. All rights reserved.</p>
-            <p className="text-xs text-white/20">Built for business leaders who demand clarity.</p>
+            <p className="text-xs text-white/20">The AI strategic brain for the modern company.</p>
           </div>
         </div>
       </footer>
