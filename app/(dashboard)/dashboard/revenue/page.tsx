@@ -1,28 +1,93 @@
 'use client'
-import { DollarSign, TrendingUp, Users, Target } from 'lucide-react'
-import { AIEngineChat } from '@/components/ai/AIEngineChat'
+
+import { useState } from 'react'
+import { DollarSign, Send } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
+import { StructuredOutput } from '@/components/ai/StructuredOutput'
+import type { StructuredAnalysis } from '@/lib/ai/types'
+
+const SUGGESTED = [
+  'Full revenue intelligence analysis',
+  'Why has our revenue growth slowed?',
+  'Which customer segments are most valuable?',
+  'Where are we leaking revenue?',
+  'What are our biggest pipeline risks?',
+  'What is our highest-leverage revenue growth action?',
+]
 
 export default function RevenueIntelligencePage() {
+  const [query, setQuery] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [result, setResult] = useState<StructuredAnalysis | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  const analyze = async (q: string) => {
+    if (!q.trim() || loading) return
+    setLoading(true); setError(null); setResult(null)
+    try {
+      const res = await fetch('/api/ai/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: q, engine: 'revenue' }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error ?? 'Analysis failed')
+      setResult(data.analysis)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Analysis failed')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
-    <AIEngineChat
-      engineName="Revenue Intelligence"
-      description="I'm your AI Revenue Intelligence engine. Ask me anything about your revenue performance, pipeline health, customer segments, pricing strategy, or growth constraints. I will analyze what's working, what's at risk, and where your highest-value revenue opportunities are. What do you want to understand about your revenue?"
-      placeholder="e.g. Why has our revenue growth slowed over the past 3 months?"
-      systemHint="You are an AI Revenue Intelligence engine. Analyze revenue performance, pipeline health, customer segments, pricing, growth constraints, and revenue risks. Identify what's working, what's underperforming, churn risks, upsell opportunities, and prioritized revenue growth levers."
-      suggested={[
-        'Why has our revenue growth slowed?',
-        'Which customer segments are most valuable?',
-        'Where are we leaking revenue?',
-        'What are our biggest pipeline risks?',
-        'How should we think about pricing?',
-        'What is our highest-leverage revenue growth action?',
-      ]}
-      contextItems={[
-        { icon: DollarSign, label: 'Engine', value: 'Revenue Intelligence' },
-        { icon: TrendingUp, label: 'Covers', value: 'Growth, pipeline & pricing' },
-        { icon: Users, label: 'Also covers', value: 'Customer segments & churn' },
-        { icon: Target, label: 'Output', value: 'Revenue opportunities & risks' },
-      ]}
-    />
+    <div className="max-w-4xl space-y-6">
+      <div>
+        <div className="flex items-center gap-2 mb-1">
+          <div className="w-8 h-8 bg-[#0F1E3C] rounded-lg flex items-center justify-center">
+            <DollarSign className="h-4 w-4 text-[#D4A843]" />
+          </div>
+          <h1 className="text-xl font-bold text-[#0F1E3C]">Revenue Intelligence</h1>
+        </div>
+        <p className="text-sm text-[#64748B] ml-10">
+          Deep AI analysis of revenue performance, pipeline health, customer dynamics, pricing, and growth constraints — identifying revenue leaks and high-value opportunities.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-200 p-5">
+        <label className="text-xs font-bold text-[#64748B] uppercase tracking-widest mb-2 block">
+          What do you want to understand about your revenue?
+        </label>
+        <textarea rows={2} value={query} onChange={e => setQuery(e.target.value)}
+          placeholder="e.g. Why has our revenue growth slowed and what should we do about it?"
+          className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D4A843] resize-none bg-[#F8F6F1]"
+          disabled={loading} />
+        <div className="flex items-center justify-between mt-3">
+          <div className="flex flex-wrap gap-2">
+            {SUGGESTED.map(s => (
+              <button key={s} onClick={() => { setQuery(s); analyze(s) }}
+                className="text-xs bg-[#F8F6F1] text-[#64748B] px-3 py-1.5 rounded-full hover:bg-[#0F1E3C] hover:text-white transition-colors border border-gray-200">
+                {s}
+              </button>
+            ))}
+          </div>
+          <Button onClick={() => analyze(query)} disabled={!query.trim() || loading} loading={loading} className="ml-3 flex-shrink-0">
+            <Send className="h-4 w-4" /> {loading ? 'Analyzing...' : 'Analyze Revenue'}
+          </Button>
+        </div>
+      </div>
+
+      {error && <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl p-4">{error}</div>}
+      {loading && (
+        <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center">
+          <p className="text-sm font-semibold text-[#0F1E3C] mb-1">Analyzing revenue intelligence…</p>
+          <p className="text-xs text-[#64748B]">Processing pipeline, customers, pricing, growth constraints…</p>
+          <div className="flex justify-center gap-1 mt-4">
+            {[0, 1, 2].map(i => <div key={i} className="w-2 h-2 bg-[#D4A843] rounded-full animate-bounce" style={{ animationDelay: `${i * 0.2}s` }} />)}
+          </div>
+        </div>
+      )}
+      {result && <StructuredOutput analysis={result} />}
+    </div>
   )
 }
