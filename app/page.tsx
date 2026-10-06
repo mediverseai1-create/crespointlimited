@@ -138,21 +138,21 @@ export default function LandingPage() {
         .font-sans-body { font-family: 'Inter', system-ui, sans-serif; }
       `}</style>
 
-      <div className="font-sans-body bg-[#F8F6F1] min-h-screen text-[#0F1E3C]">
+      <div className="font-sans-body bg-[#FAF5EE] min-h-screen text-[#0F1E3C]">
 
         {/* ── NAV ── */}
-        <nav className="sticky top-0 z-50 bg-[#F8F6F1]/95 backdrop-blur border-b border-[#0F1E3C]/8">
+        <nav className="sticky top-0 z-50 bg-[#FAF5EE]/95 backdrop-blur border-b border-[#0F1E3C]/8">
           <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <Link href="/" className="font-serif-display font-bold text-xl text-[#0F1E3C] tracking-tight">
               CrestPoint
             </Link>
-            <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[#64748B]">
+            <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[#6B7280]">
               <Link href="#features" className="hover:text-[#0F1E3C] transition-colors">Features</Link>
               <Link href="#engines" className="hover:text-[#0F1E3C] transition-colors">AI Engines</Link>
               <Link href="#pricing" className="hover:text-[#0F1E3C] transition-colors">Pricing</Link>
             </div>
             <div className="flex items-center gap-3">
-              <Link href="/auth/signin" className="text-sm font-medium text-[#64748B] hover:text-[#0F1E3C] transition-colors">
+              <Link href="/auth/signin" className="text-sm font-medium text-[#6B7280] hover:text-[#0F1E3C] transition-colors">
                 Log in
               </Link>
               <Link href="/auth/signup"
@@ -165,7 +165,7 @@ export default function LandingPage() {
 
         {/* ── HERO ── */}
         <section className="max-w-6xl mx-auto px-6 pt-24 pb-20 text-center">
-          <p className="text-sm font-semibold text-[#D4A843] uppercase tracking-widest mb-6">
+          <p className="text-sm font-semibold text-[#F06930] uppercase tracking-widest mb-6">
             AI Executive Intelligence
           </p>
           <h1 className="font-serif-display text-5xl md:text-7xl font-bold text-[#0F1E3C] leading-[1.1] mb-6 max-w-4xl mx-auto">
@@ -173,11 +173,11 @@ export default function LandingPage() {
             <span className="relative inline-block">
               strategic advantage
               <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 400 16" fill="none" preserveAspectRatio="none">
-                <path d="M2 12 Q100 4 200 10 Q300 16 398 8" stroke="#D4A843" strokeWidth="3" strokeLinecap="round" fill="none"/>
+                <path d="M2 12 Q100 4 200 10 Q300 16 398 8" stroke="#F06930" strokeWidth="3" strokeLinecap="round" fill="none"/>
               </svg>
             </span>
           </h1>
-          <p className="text-lg text-[#64748B] max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg text-[#6B7280] max-w-2xl mx-auto mb-10 leading-relaxed">
             CrestPoint is the AI intelligence system for business executives — analyzing your context, surfacing risks, modeling scenarios, and generating structured recommendations so you lead with clarity.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -201,11 +201,11 @@ export default function LandingPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white/5 rounded-2xl p-5 border border-white/10">
-                <p className="text-xs text-[#D4A843] font-bold uppercase tracking-widest mb-3">Decision Engine</p>
+                <p className="text-xs text-[#F06930] font-bold uppercase tracking-widest mb-3">Decision Engine</p>
                 <p className="text-sm text-white/80 mb-4 leading-relaxed">Should we enter the East African market in Q1 or delay to Q3?</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#D4A843]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#F06930]" />
                     <p className="text-xs text-white/60">Confidence: 87%</p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -219,7 +219,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-white/5 rounded-2xl p-5 border border-white/10">
-                <p className="text-xs text-[#D4A843] font-bold uppercase tracking-widest mb-3">Risk Intelligence</p>
+                <p className="text-xs text-[#F06930] font-bold uppercase tracking-widest mb-3">Risk Intelligence</p>
                 <div className="space-y-3">
                   {[
                     { label: 'Revenue concentration', level: 'High', color: 'bg-red-400' },
@@ -234,7 +234,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-white/5 rounded-2xl p-5 border border-white/10">
-                <p className="text-xs text-[#D4A843] font-bold uppercase tracking-widest mb-3">AI Recommendations</p>
+                <p className="text-xs text-[#F06930] font-bold uppercase tracking-widest mb-3">AI Recommendations</p>
                 <div className="space-y-3">
                   {[
                     { title: 'Diversify top 3 clients', priority: 'Critical' },
@@ -257,7 +257,7 @@ export default function LandingPage() {
 
         {/* ── TRUST STRIP ── */}
         <section className="border-y border-[#0F1E3C]/10 bg-white/40 py-6">
-          <div className="max-w-5xl mx-auto px-6 flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-[#64748B]">
+          <div className="max-w-5xl mx-auto px-6 flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-[#6B7280]">
             {[
               { icon: Lock,       label: 'Bank-grade security' },
               { icon: Zap,        label: 'Real-time intelligence' },
@@ -265,7 +265,7 @@ export default function LandingPage() {
               { icon: Headphones, label: 'AI-powered support' },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-2">
-                <Icon className="h-4 w-4 text-[#D4A843]" />
+                <Icon className="h-4 w-4 text-[#F06930]" />
                 <span>{label}</span>
               </div>
             ))}
@@ -274,7 +274,7 @@ export default function LandingPage() {
 
         {/* ── FEATURE TABS ── */}
         <section id="features" className="py-24 max-w-6xl mx-auto px-6">
-          <p className="text-sm font-semibold text-[#D4A843] uppercase tracking-widest text-center mb-4">Intelligence engines</p>
+          <p className="text-sm font-semibold text-[#F06930] uppercase tracking-widest text-center mb-4">Intelligence engines</p>
           <h2 className="font-serif-display text-4xl md:text-5xl font-bold text-[#0F1E3C] text-center mb-16 max-w-2xl mx-auto leading-tight">
             Everything you need to lead with intelligence
           </h2>
@@ -288,7 +288,7 @@ export default function LandingPage() {
                   className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
                     activeTab === tab.id
                       ? 'bg-[#0F1E3C] text-white shadow-sm'
-                      : 'bg-white border border-[#0F1E3C]/10 text-[#64748B] hover:border-[#0F1E3C]/30 hover:text-[#0F1E3C]'
+                      : 'bg-white border border-[#0F1E3C]/10 text-[#6B7280] hover:border-[#0F1E3C]/30 hover:text-[#0F1E3C]'
                   }`}>
                   <Icon className="h-4 w-4" />
                   {tab.label}
@@ -303,14 +303,14 @@ export default function LandingPage() {
               <h3 className="font-serif-display text-3xl md:text-4xl font-bold text-[#0F1E3C] leading-tight mb-6">
                 {activeFeature.headline}
               </h3>
-              <p className="text-[#64748B] leading-relaxed mb-8 text-lg">
+              <p className="text-[#6B7280] leading-relaxed mb-8 text-lg">
                 {activeFeature.body}
               </p>
               <ul className="space-y-3 mb-8">
                 {activeFeature.bullets.map(b => (
                   <li key={b} className="flex items-center gap-3 text-sm font-medium text-[#0F1E3C]">
-                    <div className="w-5 h-5 rounded-full bg-[#D4A843]/20 flex items-center justify-center flex-shrink-0">
-                      <Check className="h-3 w-3 text-[#D4A843]" />
+                    <div className="w-5 h-5 rounded-full bg-[#F06930]/20 flex items-center justify-center flex-shrink-0">
+                      <Check className="h-3 w-3 text-[#F06930]" />
                     </div>
                     {b}
                   </li>
@@ -324,17 +324,17 @@ export default function LandingPage() {
             <div className="bg-[#0F1E3C] rounded-3xl p-6 min-h-[340px] flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  {(() => { const Icon = activeFeature.icon; return <div className="w-8 h-8 rounded-lg bg-[#D4A843]/20 flex items-center justify-center"><Icon className="h-4 w-4 text-[#D4A843]" /></div> })()}
+                  {(() => { const Icon = activeFeature.icon; return <div className="w-8 h-8 rounded-lg bg-[#F06930]/20 flex items-center justify-center"><Icon className="h-4 w-4 text-[#F06930]" /></div> })()}
                   <p className="text-sm font-bold text-white">{activeFeature.label}</p>
                 </div>
                 <p className="text-xs text-white/50 uppercase tracking-widest mb-4 font-semibold">Analysis output</p>
                 <div className="space-y-3">
                   <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <p className="text-xs text-[#D4A843] font-semibold mb-2">Summary</p>
+                    <p className="text-xs text-[#F06930] font-semibold mb-2">Summary</p>
                     <p className="text-xs text-white/70 leading-relaxed">AI analysis complete. Confidence: 87%. 3 key findings, 4 recommendations, 2 critical risks identified.</p>
                   </div>
                   <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <p className="text-xs text-[#D4A843] font-semibold mb-2">Reasoning Chain</p>
+                    <p className="text-xs text-[#F06930] font-semibold mb-2">Reasoning Chain</p>
                     <div className="space-y-1.5">
                       {['Assessed organizational context', 'Analyzed competitive landscape', 'Modeled financial impact', 'Generated ranked recommendations'].map((step, i) => (
                         <div key={step} className="flex items-center gap-2">
@@ -348,7 +348,7 @@ export default function LandingPage() {
               </div>
               <div className="mt-4 flex items-center gap-2">
                 <div className="flex-1 bg-white/10 rounded-full h-1.5">
-                  <div className="bg-[#D4A843] h-1.5 rounded-full w-4/5" />
+                  <div className="bg-[#F06930] h-1.5 rounded-full w-4/5" />
                 </div>
                 <span className="text-xs text-white/40">87% confidence</span>
               </div>
@@ -359,7 +359,7 @@ export default function LandingPage() {
         {/* ── HOW IT WORKS ── */}
         <section className="bg-[#0F1E3C] py-24">
           <div className="max-w-5xl mx-auto px-6 text-center">
-            <p className="text-sm font-semibold text-[#D4A843] uppercase tracking-widest mb-4">How it works</p>
+            <p className="text-sm font-semibold text-[#F06930] uppercase tracking-widest mb-4">How it works</p>
             <h2 className="font-serif-display text-4xl md:text-5xl font-bold text-white mb-16 max-w-2xl mx-auto leading-tight">
               The AI sits at the core
             </h2>
@@ -370,7 +370,7 @@ export default function LandingPage() {
                 { n: '03', title: 'Act and improve', body: 'Accept, reject, or defer each recommendation. The AI records your decisions and outcomes. Over time, it becomes smarter about what works for your specific business.' },
               ].map(s => (
                 <div key={s.n} className="text-left p-6 rounded-3xl bg-white/5 border border-white/10">
-                  <span className="font-serif-display text-5xl font-bold text-[#D4A843]/40 block mb-4">{s.n}</span>
+                  <span className="font-serif-display text-5xl font-bold text-[#F06930]/40 block mb-4">{s.n}</span>
                   <h3 className="font-serif-display text-xl font-bold text-white mb-3">{s.title}</h3>
                   <p className="text-sm text-white/60 leading-relaxed">{s.body}</p>
                 </div>
@@ -381,19 +381,19 @@ export default function LandingPage() {
 
         {/* ── ALL ENGINES ── */}
         <section id="engines" className="py-24 max-w-6xl mx-auto px-6">
-          <p className="text-sm font-semibold text-[#D4A843] uppercase tracking-widest text-center mb-4">Full platform</p>
+          <p className="text-sm font-semibold text-[#F06930] uppercase tracking-widest text-center mb-4">Full platform</p>
           <h2 className="font-serif-display text-4xl md:text-5xl font-bold text-[#0F1E3C] text-center mb-4 max-w-xl mx-auto leading-tight">
             10 AI engines. One intelligence platform.
           </h2>
-          <p className="text-[#64748B] text-center max-w-xl mx-auto mb-16">Every engine shares the same organizational memory and feeds recommendations into the same actionable inbox.</p>
+          <p className="text-[#6B7280] text-center max-w-xl mx-auto mb-16">Every engine shares the same organizational memory and feeds recommendations into the same actionable inbox.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {engines.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="bg-white border border-[#0F1E3C]/8 rounded-2xl p-5 hover:border-[#D4A843]/50 hover:shadow-lg transition-all duration-300 group">
-                <div className="w-10 h-10 bg-[#F8F6F1] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#D4A843]/10 transition-colors">
+              <div key={title} className="bg-white border border-[#0F1E3C]/8 rounded-2xl p-5 hover:border-[#F06930]/50 hover:shadow-lg transition-all duration-300 group">
+                <div className="w-10 h-10 bg-[#FAF5EE] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#F06930]/10 transition-colors">
                   <Icon className="h-5 w-5 text-[#0F1E3C]" />
                 </div>
                 <h3 className="font-semibold text-[#0F1E3C] text-sm mb-2 leading-snug">{title}</h3>
-                <p className="text-xs text-[#64748B] leading-relaxed">{desc}</p>
+                <p className="text-xs text-[#6B7280] leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -402,37 +402,37 @@ export default function LandingPage() {
         {/* ── PRICING ── */}
         <section id="pricing" className="py-24 bg-white/50">
           <div className="max-w-6xl mx-auto px-6">
-            <p className="text-sm font-semibold text-[#D4A843] uppercase tracking-widest text-center mb-4">Pricing</p>
+            <p className="text-sm font-semibold text-[#F06930] uppercase tracking-widest text-center mb-4">Pricing</p>
             <h2 className="font-serif-display text-4xl md:text-5xl font-bold text-[#0F1E3C] text-center mb-4 leading-tight">
               Intelligence that fits your stage
             </h2>
-            <p className="text-[#64748B] text-center max-w-lg mx-auto mb-16">Start free. Upgrade as your intelligence needs grow.</p>
+            <p className="text-[#6B7280] text-center max-w-lg mx-auto mb-16">Start free. Upgrade as your intelligence needs grow.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {pricing.map(plan => (
                 <div key={plan.name}
                   className={`rounded-3xl p-7 flex flex-col ${plan.highlight
-                    ? 'bg-[#0F1E3C] text-white shadow-2xl ring-2 ring-[#D4A843]'
+                    ? 'bg-[#0F1E3C] text-white shadow-2xl ring-2 ring-[#F06930]'
                     : 'bg-white border border-[#0F1E3C]/8 text-[#0F1E3C]'}`}>
                   {plan.highlight && (
-                    <p className="text-xs font-bold text-[#D4A843] uppercase tracking-widest mb-3">Most popular</p>
+                    <p className="text-xs font-bold text-[#F06930] uppercase tracking-widest mb-3">Most popular</p>
                   )}
                   <h3 className={`font-serif-display text-xl font-bold mb-1 ${plan.highlight ? 'text-white' : 'text-[#0F1E3C]'}`}>{plan.name}</h3>
                   <div className="flex items-baseline gap-1 mb-2">
                     <span className={`font-serif-display text-4xl font-bold ${plan.highlight ? 'text-white' : 'text-[#0F1E3C]'}`}>{plan.price}</span>
-                    <span className={`text-sm ${plan.highlight ? 'text-white/50' : 'text-[#64748B]'}`}>/{plan.period}</span>
+                    <span className={`text-sm ${plan.highlight ? 'text-white/50' : 'text-[#6B7280]'}`}>/{plan.period}</span>
                   </div>
-                  <p className={`text-sm mb-6 leading-relaxed ${plan.highlight ? 'text-white/60' : 'text-[#64748B]'}`}>{plan.desc}</p>
+                  <p className={`text-sm mb-6 leading-relaxed ${plan.highlight ? 'text-white/60' : 'text-[#6B7280]'}`}>{plan.desc}</p>
                   <ul className="space-y-3 mb-8 flex-1">
                     {plan.features.map(f => (
                       <li key={f} className="flex items-start gap-2.5">
-                        <Check className={`h-4 w-4 flex-shrink-0 mt-0.5 ${plan.highlight ? 'text-[#D4A843]' : 'text-[#D4A843]'}`} />
-                        <span className={`text-sm ${plan.highlight ? 'text-white/80' : 'text-[#64748B]'}`}>{f}</span>
+                        <Check className={`h-4 w-4 flex-shrink-0 mt-0.5 ${plan.highlight ? 'text-[#F06930]' : 'text-[#F06930]'}`} />
+                        <span className={`text-sm ${plan.highlight ? 'text-white/80' : 'text-[#6B7280]'}`}>{f}</span>
                       </li>
                     ))}
                   </ul>
                   <Link href={plan.href}
                     className={`w-full text-center py-3 rounded-full text-sm font-bold transition-colors ${plan.highlight
-                      ? 'bg-[#D4A843] text-[#0F1E3C] hover:bg-[#e6ba52]'
+                      ? 'bg-[#F06930] text-white hover:bg-[#d4561f]'
                       : 'bg-[#0F1E3C] text-white hover:bg-[#1a3060]'}`}>
                     {plan.cta}
                   </Link>
@@ -444,7 +444,7 @@ export default function LandingPage() {
 
         {/* ── FAQ ── */}
         <section className="py-24 max-w-3xl mx-auto px-6">
-          <p className="text-sm font-semibold text-[#D4A843] uppercase tracking-widest text-center mb-4">FAQ</p>
+          <p className="text-sm font-semibold text-[#F06930] uppercase tracking-widest text-center mb-4">FAQ</p>
           <h2 className="font-serif-display text-4xl font-bold text-[#0F1E3C] text-center mb-16">Common questions</h2>
           <div className="divide-y divide-[#0F1E3C]/8">
             {faqs.map((faq, i) => (
@@ -452,10 +452,10 @@ export default function LandingPage() {
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full flex items-center justify-between py-5 text-left gap-4">
                   <span className="font-serif-display text-lg font-semibold text-[#0F1E3C]">{faq.q}</span>
-                  <ChevronDown className={`h-5 w-5 text-[#64748B] flex-shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`h-5 w-5 text-[#6B7280] flex-shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} />
                 </button>
                 {openFaq === i && (
-                  <p className="text-[#64748B] leading-relaxed pb-5 text-sm">{faq.a}</p>
+                  <p className="text-[#6B7280] leading-relaxed pb-5 text-sm">{faq.a}</p>
                 )}
               </div>
             ))}
@@ -465,7 +465,7 @@ export default function LandingPage() {
         {/* ── FINAL CTA ── */}
         <section className="py-24 max-w-6xl mx-auto px-6">
           <div className="bg-[#0F1E3C] rounded-3xl p-12 md:p-16 text-center">
-            <p className="text-sm font-semibold text-[#D4A843] uppercase tracking-widest mb-4">Get started today</p>
+            <p className="text-sm font-semibold text-[#F06930] uppercase tracking-widest mb-4">Get started today</p>
             <h2 className="font-serif-display text-4xl md:text-5xl font-bold text-white mb-6 max-w-2xl mx-auto leading-tight">
               Your AI executive team is ready
             </h2>
@@ -474,7 +474,7 @@ export default function LandingPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/auth/signup"
-                className="bg-[#D4A843] text-[#0F1E3C] font-bold px-10 py-4 rounded-full text-base hover:bg-[#e6ba52] transition-colors w-full sm:w-auto text-center">
+                className="bg-[#F06930] text-[#0F1E3C] font-bold px-10 py-4 rounded-full text-base hover:bg-[#d4561f] transition-colors w-full sm:w-auto text-center">
                 Start for free
               </Link>
               <Link href="/pricing"
@@ -489,13 +489,13 @@ export default function LandingPage() {
         <footer className="border-t border-[#0F1E3C]/10 py-12">
           <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
             <span className="font-serif-display font-bold text-lg text-[#0F1E3C]">CrestPoint</span>
-            <div className="flex flex-wrap gap-6 text-sm text-[#64748B] justify-center">
+            <div className="flex flex-wrap gap-6 text-sm text-[#6B7280] justify-center">
               <Link href="/auth/signin" className="hover:text-[#0F1E3C] transition-colors">Log in</Link>
               <Link href="/auth/signup" className="hover:text-[#0F1E3C] transition-colors">Sign up</Link>
               <Link href="#pricing" className="hover:text-[#0F1E3C] transition-colors">Pricing</Link>
               <Link href="mailto:support@crestpointlimited.click" className="hover:text-[#0F1E3C] transition-colors">Contact</Link>
             </div>
-            <p className="text-sm text-[#64748B]">© {new Date().getFullYear()} CrestPoint Limited</p>
+            <p className="text-sm text-[#6B7280]">© {new Date().getFullYear()} CrestPoint Limited</p>
           </div>
         </footer>
       </div>
